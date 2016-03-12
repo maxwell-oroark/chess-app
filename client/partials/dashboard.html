@@ -1,0 +1,23 @@
+<div ng-controller = "match-maker-controller">
+  <div class = "container-fluid">
+    <div class = "row">
+      <h4 class = "welcome-banner col-xs-4 animated fadeOut">Welcome to your dashboard, {{user.username}}</h4>
+    </div>
+  </div>
+  <div class = "container">
+      <div class = "row">
+        <button ng-click = "newGame()" id = "new-g"class = "btn btn-success">Create A New Game</button>
+        <button ng-click = "emptyBoard()" id = "local" class = "btn btn-warning">Play Locally</button>
+      </div>
+      <hr>
+      <div class = "row">
+        <h3>Join A Public Game :</h3>
+        <div class = 'join-game-container'>
+            <div ng-click = "goToGame($index)" class = "lobby-game" ng-repeat = "game in publicGames">
+              <img src = "./images/rainbow-chess.jpeg"/>
+              <p> GAME ID: {{ publicGames[$index]._id  }} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,357 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	height: 1000px;
+	padding: 0;
+	margin: 0;
+	font-family:'Lato', sans-serif;;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	margin: 0;
+}
+.glyphicon.glyphicon-knight {
+	font-size: 30px;
+}
+.emerald {
+	color: #2ecc71;
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 1.5em;
+}
+.grey {
+	color: #7f8c8d;
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 1.5em;
+}
+.blue {
+	color: #3498db ;
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 1.5em;
+}
+
+.fenStrSub {
+	margin-left: 10px;
+}
+
+.dropdown-toggle {
+	font-size: 1.25em;
+}
+
+.navbar-header {
+	color : #777;
+	padding-top : 5px;
+	padding-bottom: 5px;
+}
+.navbar-inverse {
+	margin-bottom: 50px;
+}
+
+.navbar-header h4 {
+	padding-top: 15px;
+}
+
+#openings-dropdown {
+	padding: 7px;
+	margin-right: 100px;
+	float: right;
+}
+
+
+.au-sig {
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.space {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+#fen-machine {
+	margin: 10px auto 10px 10px;
+}
+
+#fen-machine input {
+	width: 75%;
+}
+
+.game-buttons {
+	padding-left: 50px;
+	padding-top: 10px;
+}
+
+.game-buttons button {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.main-game-controls button {
+	margin: 10px 10px 10px auto;
+}
+
+#game-area {
+	height: 850px;
+}
+
+.switch {
+	transform: rotate(180deg);
+}
+
+.switchBack {
+	transform: rotate(180deg);
+}
+
+#stats-area {
+	background-color: rgba(52, 152, 219,.15);
+	border: 3px solid rgba(46, 204, 113,.5);
+	border-radius: 5px;
+	height: 800px;
+	width: 100%;
+	margin-left: 75px;
+	text-transform: uppercase;
+	font-style: italic;
+}
+
+.login {
+	margin-bottom: 50px;
+}
+
+#logout {
+	margin-top : 10px;
+	float: right;
+}
+
+/*BELOW FOR DASHBOARD STYLE*/
+.new-game-container {
+	height: 40vh;
+	background-color: rgba(44, 62, 80,.5);
+}
+
+.join-game-container {
+	height: 80vh;
+	margin-top: 10px;
+	border-radius: 5px;
+	border : 2px solid black;
+	background-color: rgba(22, 160, 133,.25)
+}
+
+#new-g {
+	margin-top : 30px;
+	margin-bottom: 10px;
+}
+
+#local {
+	margin-top : 30px;
+	margin-bottom: 10px;
+}
+
+.lobby-game {
+	display : inline-block;
+	height: 200px;
+	width: 200px;
+	border: 2px solid black;
+}
+
+.lobby-game img {
+	margin-left: auto;
+	margin-right: auto;
+	height: 150px;
+	width: 150px;
+}
+
+
+.welcome-banner {
+	position: absolute;
+	left : 0;
+	top : 62px;
+	margin-left : 0px;
+	margin-bottom : 20px;
+	padding-left : 40px;
+	background-color : #c0392b;
+	color:white;
+	padding : 10px;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+	animation-delay: 3s;
+}
+
+/*#stats-title {
+	width: 100%;
+	height: 75px;
+	margin: 0;
+	padding: 15px;
+	background-color: rgba(231, 76, 60, .25);
+	text-align: center;
+	line-height: 75px;
+	vertical-align: middle;
+	color: white;
+	font-size: 2em;
+	letter-spacing: 5px
+}
+#stats-title h3 {
+	margin-top: 8px;
+}*/
+
+
+
+
+#captured-pieces {
+	height: 850px;
+	background color: #7f8c8d;
+	width: 100%;
+}
+
+
+#chessBoard {
+	height: 100%;
+	width: 804px;
+	margin-left:10px;
+	border: 2px solid black;
+	border-radius: 5px;
+	float: left;
+	overflow: hidden;
+}
+
+.chess-row {
+	width: 100%;
+	height:100px;
+	padding: 0;
+	margin: 0;
+}
+
+.square {
+	display: inline-block;
+	overflow: hidden;
+	background-color: #bdc3c7;
+	border: 2px solid black;
+	text-align: center;
+	line-height: 100px;
+	height: 100px;
+	width: 100px;
+	padding: 5px;
+	margin: 0px;
+}
+
+
+.chess-row:nth-child(even) .square:nth-child(odd){
+	background-color: #95a5a6;
+}
+
+.chess-row:nth-child(odd) .square:nth-child(even){
+	background-color: #95a5a6;
+}
+
+.square.highlighted {
+	background-image: radial-gradient(#1abc9c, #2ecc71);
+
+/*	background-color:#2ecc71 !important
+    border: 2px solid #2ecc71;*/
+}
+
+/*Captured Pieces Styles*/
+
+.capture {
+	display: inline-block;
+	height: 100px;
+	width: 100px;
+	margin: 7px;
+	margin-left: 10px;
+	vertical-align: middle
+
+}
+
+.capture img {
+	margin-left: auto;
+	margin-right: auto;
+	text-align:
+}
+
+@media (min-width: 400px) and (max-width: 1200px) {
+		#stats-area {
+		float: left;
+		margin-top: 50px;
+		margin-left: 0px;
+		height: 300px;
+		width: 804px;
+		}
+
+	#game-area{
+		width:810px;
+	}
+
+	#chessBoard {
+			margin: 0;
+	}
+
+	.main-game-controls {
+		right: -173px;
+	}
+
+	#fen-machine {
+		padding-left: 72px;
+	}
+
+	.emerald {
+	color: #2ecc71;
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 1em;
+	}
+	.grey {
+		color: #7f8c8d;
+		display: inline-block;
+		margin-right: 10px;
+		font-size: 1em;
+	}
+	.blue {
+		color: #3498db ;
+		display: inline-block;
+		margin-right: 10px;
+		font-size: 1em;
+	}
+}
+
+footer {
+	background:#2c3e50;
+	padding-left: 25px;
+	padding-top: 25px;
+	color: white;
+	width:100%;
+	height:50px;
+	position:absolute;
+	bottom:0;
+	left:0;
+}
+
+@media (min-width: 400px) and (max-width: 1000px){
+	.emerald, .grey, .blue {
+		display: none;
+	}
+
+
+
+ }
+
+
+ /*#content-views {
+	 position : relative;
+ }
+
+ .ng-enter, .ng-leave {
+	 	width: 100%;
+		position: absolute;
+
+ }
+
+ .ng-enter {
+	 	animation: zoomInDown 1.2s both ease-in;
+ }
+
+ .ng-leave {
+	 animation: zoomOutDown 1.2s both ease-in;
+ }*/

@@ -1,0 +1,34 @@
+<nav class="navbar navbar-inverse animated fadeIn">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class = "row">
+      <div class="col-md-3 navbar-header mynavbar">
+        <a class="navbar-brand" href="#"><span ng-show="loggedIn">{{user.username}}</span></a>
+      </div>
+
+      <div class = 'col-md-6 navbar-header'>
+        <h4 class = 'emerald'>a chess/ </h4><h4 class = 'grey'> graphic user interface/ </h4><h4 class = 'blue'> powered by pure javascript</h4>
+      </div>
+      <div ng-show="loggedIn" class = 'col-md-3 logout-btn' >
+        <button ng-click = "logout()" id = "logout" class = "btn btn-default">Log Out</button>
+      </div>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+      <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav" id = 'openings-dropdown' >
+
+             Collection of openings displayed in the dropdown -->
+
+            <!-- <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Openings<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat = 'game in games' ng-click = 'parseFen(game.position)'><a href = "#">{{game.name}}</a></li>
+                </ul>
+            </li>  -->
+
+          <!-- </ul> -->
+
+      <!-- </div>        /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>

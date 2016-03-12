@@ -1,0 +1,43 @@
+
+
+		<div class = 'container' ng-controller = "chess-controller">
+			<div class = 'row'>
+				<div class = 'col-xs-6 col-md-6'>
+					<div id = "fen-machine">
+						<input type = 'text' placeholder = 'FEN string goes here' ng-model = 'fen'>
+						<button ng-click = 'parseFen(fen)' class = 'fenStrSub btn btn-primary'>submit</button>
+					</div>
+				</div>
+				<div class = 'main-game-controls col-xs-6 col-md-6'>
+					<button style = "margin-left: 18px;" ng-click = 'parseFen(newGameFen)' class = 'btn btn-info'>New Game</button>
+					<button ng-click = 'switchBoard()' class = 'btn btn-warning'>Switch Sides</button>
+				</div>
+			</div>
+		</div>
+
+		<div id = 'game-area' class = 'container'>
+			<div class = 'row'>
+				<div class = 'col-md-12 col-lg-8'>
+					<div id = 'play-area'>
+						<div id = "chessBoard" ng-class = '{switch : switchBlack}'>
+							<div ng-repeat = 'row in board.rows' class = 'chess-row'>
+								<div ng-class = '{highlighted : square.active, switchBack : switchBack}' ng-click = 'clickPiece($index, square)'ng-repeat = 'square in board.rows[$index].squares' class = 'square'>
+									<img ng-show = 'square.contents' ng-src = '{{ square.contents.image }}'/>
+									{{ square.ID }}
+									{{ square.$index }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class = 'col-md-12 col-lg-4'>
+					<div id = 'stats-area'>
+
+						<div class = 'capture' ng-repeat = 'piece in capturedPieces'>
+							<img ng-show = 'capturedPieces' ng-src = '{{piece.image}}'/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
