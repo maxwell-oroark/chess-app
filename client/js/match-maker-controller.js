@@ -28,7 +28,7 @@ angular.module("chess")
         })
       }
 
-      //This (hopefully) routes the user to an empty board when the click on the game they want to play
+      //This routes the user to an empty board when the click on the game they want to play and begins a 1 second interval calling the game object.
       $scope.goToGame = function($index){
         $location.path('/games/' + $scope.publicGames[$index]._id)
         $interval(function(){
