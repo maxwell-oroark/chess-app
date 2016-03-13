@@ -90,6 +90,8 @@ chessModule
 			$scope.deactivatePieces()
 			fromSquare.contents = null
 
+      updateFen()
+      updateGame($scope.currentFen)
 
 			//change move below
 			if($scope.turn === 'white'){
@@ -115,12 +117,58 @@ chessModule
 				$scope.turn = 'white'
 			}
 
+      updateFen()
+      updateGame($scope.currentFen)
 		}
 	}
 
 	// Attempting to build a fen parser that will set my chess board when passed a legitimate Fen string.
-
+  //I now have a fen builder which builds a new fen and pushes it into game history after each move.
+  
 	$scope.fen =  ''
+  $scope.gameHistory = []
+
+  function updateFen(){
+    var fenArray = []
+    $scope.board.arr.forEach(function(cur, index){
+      if (cur.contents) {
+        fenArray.push(cur.contents.FEN)
+      } else {
+        fenArray.push(null)
+      }
+      if ((index + 1) % 8 === 0){
+        fenArray.push('/')
+      }
+    })
+
+    var cnt = 1;
+    var out = []
+
+    fenArray.forEach(function(cur ,i, arr) {
+      if (cur === null) {
+        if (arr[i+1] === null) {
+            cnt++
+        }
+        else {
+            out.push(cnt)
+            cnt = 1
+        }
+      }
+      else {
+        out.push(cur)
+      }
+})
+    $scope.currentFen = out.join('')
+    console.log("current fen:", $scope.currentFen)
+
+  }
+
+
+
+  function updateGame(currentmove){
+    $scope.gameHistory.push(currentmove)
+    console.log("game history:", $scope.gameHistory)
+  }
 
 	$scope.parseFen = function(fenStr){
 

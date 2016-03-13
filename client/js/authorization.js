@@ -23,7 +23,7 @@
 
    // Log in a user
    authFactory.login = function (username, password) {
-     return $http.post('http://localhost:3000/api/login', {username: username, password: password})
+     return $http.post('api/login', {username : username, password : password})
        .then(function (data) {
 
          AuthToken.setToken(data.data.token);

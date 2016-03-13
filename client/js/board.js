@@ -125,25 +125,26 @@ chessModule
 
 		// A piece constructor
 
-		function Piece(name, image, color) {
+		function Piece(name, image, color, FEN) {
 			this.name = name;
 			this.image = image;
 			this.color = color;
+			this.FEN = FEN;
 
 		}
 
-		var p = new Piece('blackPawn', 'images/bP.png', 'black')
-		var r = new Piece('blackRook','images/bR.png', 'black')
-		var n = new Piece('blackKnight', 'images/bN.png', 'black')
-		var b = new Piece('blackBishop', 'images/bB.png', 'black')
-		var k = new Piece('blackKing', 'images/bK.png', 'black')
-		var q = new Piece('blackQueen', 'images/bQ.png', 'black')
-		var P = new Piece('whitePawn','images/wP.png', 'white')
-		var R = new Piece('whiteRook', 'images/wR.png', 'white')
-		var N = new Piece('whiteKnight', 'images/wN.png', 'white')
-		var B = new Piece('whiteBishop', 'images/wB.png', 'white')
-		var K = new Piece('whiteKing', 'images/wK.png', 'white')
-		var Q = new Piece('whiteQueen', 'images/wQ.png', 'white')
+		var p = new Piece('blackPawn', 'images/bP.png', 'black', 'p')
+		var r = new Piece('blackRook','images/bR.png', 'black', 'r')
+		var n = new Piece('blackKnight', 'images/bN.png', 'black', 'n')
+		var b = new Piece('blackBishop', 'images/bB.png', 'black', 'b')
+		var k = new Piece('blackKing', 'images/bK.png', 'black', 'k')
+		var q = new Piece('blackQueen', 'images/bQ.png', 'black', 'q')
+		var P = new Piece('whitePawn','images/wP.png', 'white', 'P')
+		var R = new Piece('whiteRook', 'images/wR.png', 'white', 'R')
+		var N = new Piece('whiteKnight', 'images/wN.png', 'white', 'N')
+		var B = new Piece('whiteBishop', 'images/wB.png', 'white', 'B')
+		var K = new Piece('whiteKing', 'images/wK.png', 'white', 'K')
+		var Q = new Piece('whiteQueen', 'images/wQ.png', 'white', 'Q')
 
 		gameBoard.pieces = {
 			p : p,

@@ -9,7 +9,7 @@ module.exports = {
         var token = jwt.sign({name : user.name, admin : user.admin}, "catzpajamas", {expiresInMinutes : 52000})
         user.save(function(err){
           if (err) throw err;
-          res.json({token : token, message: "User Created!", success : true})
+          res.json({ token : token, message: "User Created!", success : true})
         })
       }
     },
@@ -23,7 +23,7 @@ module.exports = {
               var token = jwt.sign({name : user.name, id : user._id, username : user.username, admin : user.admin}, "catzpajamas", {expiresInMinutes : 52000})
               res.json({token : token, message : "valid user", success: true})
             } else {
-            res.json({message : "error, wrong credentials."})
+            res.json({ message : "error, wrong credentials." })
             }
         // },1000)
         }
