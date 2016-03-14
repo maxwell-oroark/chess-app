@@ -41,7 +41,7 @@ module.exports = {
       var game = new db.Game({
         players : req.body.id,
         moves   : ['rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR']
-        
+
       })
       game.save(function(err){
         if (err) throw err
@@ -67,6 +67,7 @@ module.exports = {
       db.Game.update({_id : req.body.id}, {$set : { moves : req.body.moves}}, function(err){
         if (err) throw err
       })
+      res.json({message : 'posted game history to server'})
 
     },
 
@@ -75,11 +76,19 @@ module.exports = {
         console.log(data)
         if (err) throw err
         if (data.length > 0){
-        res.send(data[0])
+          res.send(data[0])
         } else {
-        res.send('no game found')
+          res.send('no game found')
         }
       })
+    },
+
+    all : function(req,res){
+        db.Game.find({ in_progress : true }, function(err, games){
+          if (err) throw err
+          res.json(games)
+        })
+
     }
   }
 }

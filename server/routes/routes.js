@@ -52,4 +52,7 @@ apiRouter.route("/games/")
 apiRouter.route("/games/:gameid")
   .get(ctrls.gameController.get)
 
+apiRouter.route("/games/")
+  .get(ctrls.gameController.all)
+
 module.exports = apiRouter

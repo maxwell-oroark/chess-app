@@ -1,14 +1,26 @@
 angular.module("chess")
-  .controller("match-maker-controller", function($http, $scope, $location, Auth, $timeout){
+  .controller("match-maker-controller", function($http, $scope, $location, Auth, $timeout, $interval){
 
         //This will be moved after a while into a new controller but for now the stuff below will define creating a new game for the dashboard.
       $scope.publicGames = []
 
 
-      var populatePublic = function(game){
-        $scope.game = game
-        $scope.publicGames.push($scope.game)
+
+
+      var populatePublic = function(){
+        console.log("checking database for games")
+        $http({
+          method : 'GET',
+          url    : '/api/games'
+
+        }).then(function(response){
+          $scope.publicGames = response.data
+        })
       }
+      
+      $interval(function(){
+        populatePublic()
+      },5000)
 
       $scope.emptyBoard = function(){
         $location.path('/board')
@@ -21,10 +33,11 @@ angular.module("chess")
           data   : {
             id : $scope.user.id
           }
-        }).then(function(response){
-          populatePublic(response.data.game)
-          console.log($scope.publicGames)
         })
+        // }).then(function(response){
+        //   populatePublic(response.data.game)
+        //   console.log($scope.publicGames)
+        // })
       }
 
       //This routes the user to an empty board when the click on the game they want to play and begins a 1 second interval calling the game object.
