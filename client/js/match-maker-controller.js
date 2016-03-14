@@ -1,8 +1,7 @@
 angular.module("chess")
-  .controller("match-maker-controller", function($http, $scope, $location, Auth, $interval){
+  .controller("match-maker-controller", function($http, $scope, $location, Auth, $timeout){
 
         //This will be moved after a while into a new controller but for now the stuff below will define creating a new game for the dashboard.
-      console.log("match maker controller working..")
       $scope.publicGames = []
 
 
@@ -31,7 +30,7 @@ angular.module("chess")
       //This routes the user to an empty board when the click on the game they want to play and begins a 1 second interval calling the game object.
       $scope.goToGame = function($index){
         $location.path('/games/' + $scope.publicGames[$index]._id)
-        $interval(function(){
+        $timeout(function(){
           $http({
             method : 'POST',
             url    : '/api/games/' + $scope.publicGames[$index]._id,

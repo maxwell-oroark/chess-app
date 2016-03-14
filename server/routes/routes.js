@@ -46,4 +46,10 @@ apiRouter.route("/games")
 apiRouter.route("/games/:gameid")
   .post(ctrls.gameController.goTo)
 
+apiRouter.route("/games/")
+  .put(ctrls.gameController.update)
+
+apiRouter.route("/games/:gameid")
+  .get(ctrls.gameController.get)
+
 module.exports = apiRouter

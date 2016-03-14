@@ -7,6 +7,9 @@
           <input autocomplete="off" type="password" ng-model="loginForm.password" placeholder="Password"/>
           <input type="submit"/>
       </form>
+			<div ng-show = "errmsg" class = "row">
+				<h4 class = 'welcome-banner col-xs-4 animated fadeOut'>Oh no, wrong username/</h4>
+			</div>
 		</div>
 	</div>
 

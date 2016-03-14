@@ -13,8 +13,9 @@ angular.module("chess")
     $scope.login = function(){
       Auth.login($scope.loginForm.username, $scope.loginForm.password)
       .then(function(data){
-        if (data.success){$location.path('/home')}
+        if (data.success) {$location.path('/home')}
         else {
+          console.log(data.message)
           $scope.errormsg = data.message
         }
       })
@@ -43,7 +44,6 @@ angular.module("chess")
 
           })
       }
-      console.log($scope.user)
 
-    
+
 })

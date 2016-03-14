@@ -9,7 +9,7 @@ module.exports = {
         var token = jwt.sign({name : user.name, admin : user.admin}, "catzpajamas", {expiresInMinutes : 52000})
         user.save(function(err){
           if (err) throw err;
-          res.json({token : token, message: "User Created!", success : true})
+          res.json({ token : token, message: "User Created!", success : true})
         })
       }
     },
@@ -23,7 +23,7 @@ module.exports = {
               var token = jwt.sign({name : user.name, id : user._id, username : user.username, admin : user.admin}, "catzpajamas", {expiresInMinutes : 52000})
               res.json({token : token, message : "valid user", success: true})
             } else {
-            res.json({message : "error, wrong credentials."})
+            res.json({ message : "error, wrong credentials." })
             }
         // },1000)
         }
@@ -41,6 +41,7 @@ module.exports = {
       var game = new db.Game({
         players : req.body.id,
         moves   : ['rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR']
+        
       })
       game.save(function(err){
         if (err) throw err
@@ -57,6 +58,26 @@ module.exports = {
           res.json({game : game, message : 'game successfully found?'})
         } else {
           res.json({message : 'error, no game found, check out req.params?'})
+        }
+      })
+    },
+
+    update : function(req,res){
+      //req.body is an array of Fen strings describing the entire history of the game
+      db.Game.update({_id : req.body.id}, {$set : { moves : req.body.moves}}, function(err){
+        if (err) throw err
+      })
+
+    },
+
+    get : function(req, res){
+      db.Game.find({ _id : req.params.gameid },function(err, data){
+        console.log(data)
+        if (err) throw err
+        if (data.length > 0){
+        res.send(data[0])
+        } else {
+        res.send('no game found')
         }
       })
     }

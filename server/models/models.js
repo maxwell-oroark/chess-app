@@ -9,7 +9,9 @@ var Schema = mongoose.Schema;
 var gameSchema = new Schema ({
   players : [{type: Schema.Types.ObjectId, ref: "User"}],
   created_at : {type: Date, default: Date.now},
-  moves : [String]
+  moves : [String],
+  in_progress : { type : Boolean, default : true }
+
 })
 // create a schema
 var userSchema = new Schema({
