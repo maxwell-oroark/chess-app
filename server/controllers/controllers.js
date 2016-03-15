@@ -8,11 +8,18 @@ module.exports = {
         var user = new db.User(req.body)
         var token = jwt.sign({name : user.name, admin : user.admin}, "catzpajamas", {expiresInMinutes : 52000})
         user.save(function(err){
-          if (err) throw err;
-          res.json({ token : token, message: "User Created!", success : true})
+          if (err) {
+            if(err == 1100){
+              res.json({success : false, message : "A user with that username already exists"})
+            } else {
+            res.send(err)
+            }
+          }
         })
+        res.json({success:true, token : token, user : user, message: "user created!"})
       }
     },
+
     login : function(req, res){
       db.User.findOne({username: req.body.username}, function(err, user){
         if (user){
@@ -67,7 +74,7 @@ module.exports = {
       db.Game.update({_id : req.body.id}, {$push : { moves : req.body.moves}}, function(err){
         if (err) throw err
         res.json({message : 'posted game history to server'})
-        
+
       })
 
     },

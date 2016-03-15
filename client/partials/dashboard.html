@@ -14,8 +14,10 @@
         <h3>Join A Public Game :</h3>
         <div class = 'join-game-container'>
             <div ng-click = "goToGame($index)" class = "lobby-game" ng-repeat = "game in publicGames">
+              <h3 id = "join-game-header">Join Game</h3>
               <img src = "./images/rainbow-chess.jpeg"/>
-              <p> GAME ID: {{ publicGames[$index]._id  }} </p>
+              <p> created : {{ publicGames[$index].created_at | date : 'short' }}</p>
+              <p> players : {{ publicGames[$index].players.length }} </p>
           </div>
         </div>
       </div>

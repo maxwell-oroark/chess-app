@@ -133,8 +133,9 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .join-game-container {
-	height: 80vh;
+	height: 1000px;
 	margin-top: 10px;
+	margin-bottom: 20px;
 	border-radius: 5px;
 	border : 2px solid black;
 	background-color: rgba(22, 160, 133,.25)
@@ -151,17 +152,47 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .lobby-game {
-	display : inline-block;
-	height: 200px;
+	display : inline-flex;
+	background-color: rgba(46, 204, 113,0.5);
+	color : black;
+	flex-direction : column;
+	justify-content: space-around;
+	margin: 10px;
+	height: 250px;
 	width: 200px;
-	border: 2px solid black;
+	border: 4px solid black;
+	border-top: 7px solid black;
+	font-family: 'Open Sans',"Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 500;
+	font-size: 14px;
+}
+
+.lobby-game:hover{
+	border-color : #27ae60;
+}
+
+.lobby-game h3 {
+	padding-left: 10px;
+	padding-top : 12px;
+	padding-bottom: 5px;
+	color : #ecf0f1;
+	background-color: #27ae60;
+	font-family: helvetica, sans-serif;
+	font-weight: 900;
+	letter-spacing: 4px;
+}
+
+.lobby-game p {
+	padding-left: 10px;
 }
 
 .lobby-game img {
-	margin-left: auto;
-	margin-right: auto;
-	height: 150px;
-	width: 150px;
+	margin: 5px;
+	margin-left: 35px;
+	border: 1px solid black;
+	height: 120px;
+	width: 120px;
+
 }
 
 
@@ -315,6 +346,8 @@ h1,h2,h3,h4,h5,h6 {
 		font-size: 1em;
 	}
 }
+
+
 
 footer {
 	background:#2c3e50;
