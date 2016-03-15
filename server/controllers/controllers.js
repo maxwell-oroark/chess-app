@@ -41,6 +41,7 @@ module.exports = {
       var game = new db.Game({
         players : req.body.id,
         moves   : ['rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR']
+
       })
       game.save(function(err){
         if (err) throw err
@@ -59,6 +60,36 @@ module.exports = {
           res.json({message : 'error, no game found, check out req.params?'})
         }
       })
+    },
+
+    update : function(req,res){
+      //req.body is an array of Fen strings describing the entire history of the game
+      db.Game.update({_id : req.body.id}, {$push : { moves : req.body.moves}}, function(err){
+        if (err) throw err
+        res.json({message : 'posted game history to server'})
+        
+      })
+
+    },
+
+    get : function(req, res){
+      db.Game.find({ _id : req.params.gameid },function(err, data){
+        console.log(data)
+        if (err) throw err
+        if (data.length > 0){
+          res.send(data[0])
+        } else {
+          res.send('no game found')
+        }
+      })
+    },
+
+    all : function(req,res){
+        db.Game.find({ in_progress : true }, function(err, games){
+          if (err) throw err
+          res.json(games)
+        })
+
     }
   }
 }

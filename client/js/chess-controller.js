@@ -1,29 +1,72 @@
 chessModule
-  .controller('chess-controller', ['$scope','chessData','gameLib','Auth','$location', function($scope, chessData, gameLib, Auth, $location){
+  .controller('chess-controller', ['$scope','chessData','gameLib','Auth','$location', '$http','$interval', function($scope, chessData, gameLib, Auth, $location, $http, $interval){
+
+
+  //Check status of game on server and update client
 
 	// imports board object which contains 'rows', 'files', 'squares', and an array of 64 squares.
 	// Auth.isLoggedIn()
+  $scope.boardArray = chessData.boardArray
 	$scope.board = chessData.board
 	$scope.games = gameLib.games
 	$scope.endgames = gameLib.endgames
 	$scope.famousgames = gameLib.famousgames
 	$scope.pieces = chessData.pieces
-
-	$scope.newGameFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'
+  $scope.gameId = location.hash.split('/').pop() //this locates the game ID using the URL
+  $scope.turn = 'white'
 
 	var rows = $scope.board.rows
 
-	// direct access to board array object
 
-	$scope.boardArray = chessData.boardArray
+  //this is a helper function which tries to determine who's move it is from the game history array.
+  $scope.determineTurn = function(gamehist){
+    console.log('game history',gamehist.length)
+    if (gamehist.length % 2 == 0){
+      console.log('White\'s TURN')
+      $scope.turn = 'white'
+    } else {
+      console.log('Black\'s TURN!')
+      $scope.turn = 'black'
+    }
+  }
 
-	// console.log($scope.board.rows[q].squares)
+// query the database, download the game history, populate the board with the last FEN string on the game history array.
+  $scope.queryGame = function(gameId){
+    console.log('querying database for game history... from line 34', gameId)
+    $http({
+      method: 'GET',
+      url   : 'api/games/' + gameId
 
-	console.log($scope.board)
+    }).then(function(returnData){
+      console.log("$gameHistoryFromServer: ",returnData.data.moves)//this should be an array object full of string Fen elements
+      var lastMove = returnData.data.moves.pop()//this should be the last Fen string in the database
+      $scope.gameHistoryFromServer = returnData.data.moves
+      $scope.parseFen(lastMove)
+      $scope.determineTurn(returnData.data.moves)
+    })
+  }
+  //update the game on the server ---- this is called when a piece is moved.
+  function updateGame(currentmove){
+    //this below tries to assemble $scope.gameHistory client side before pushing it to the database
+    // $scope.gameHistoryFromClient.push(currentmove)
+
+    $http({
+      method : 'PUT',
+      url    : '/api/games',
+      data   : { id : $scope.gameId, moves : currentmove }
+    }).then(function(returnData){
+      console.log('update with single Fen: ', returnData.data.message)
+    })
+  }
+
+  $interval(function(){
+    $scope.queryGame($scope.gameId)
+
+  },5000)
+
 
 	// initialize some variables and definitions
 
-	$scope.turn = 'white'
 	$scope.activePiece = null
 	var fromSquare = null
 	$scope.capturedPieces = []
@@ -82,7 +125,7 @@ chessModule
 	}
 
 	$scope.movePiece = function($index, square){
-		console.log('movePiece function running')
+		console.log('movePiece function running...')
 		if ($scope.activePiece && square.contents === null){
 
 			square.contents = $scope.activePiece
@@ -90,16 +133,14 @@ chessModule
 			$scope.deactivatePieces()
 			fromSquare.contents = null
 
+      //update Fen generates a new fen string from the most recent look of the board
       updateFen()
+      //update Game takes that lastest fen and updates the database with the entire game history
       updateGame($scope.currentFen)
+      $scope.parseFen($scope.currentFen)
 
-			//change move below
-			if($scope.turn === 'white'){
-				$scope.turn = 'black'
-			}
-			else {
-				$scope.turn = 'white'
-			}
+
+
 		}
 		else if ($scope.activePiece && square.contents !== null){
 			console.log('capturing...')
@@ -109,26 +150,23 @@ chessModule
 			fromSquare.contents = null
 			console.log($scope.capturedPieces)
 
-			//change move below
-			if($scope.turn === 'white'){
-				$scope.turn = 'black'
-			}
-			else {
-				$scope.turn = 'white'
-			}
-
+      //update Fen generates a new fen string from the most recent look of the board
       updateFen()
+      //update Game takes that lastest fen and updates the database with the entire game history
       updateGame($scope.currentFen)
+      $scope.parseFen($scope.currentFen)
+
 		}
 	}
 
 	// Attempting to build a fen parser that will set my chess board when passed a legitimate Fen string.
   //I now have a fen builder which builds a new fen and pushes it into game history after each move.
-  
+
 	$scope.fen =  ''
-  $scope.gameHistory = []
+
 
   function updateFen(){
+    console.log('constructing fen string...')
     var fenArray = []
     $scope.board.arr.forEach(function(cur, index){
       if (cur.contents) {
@@ -158,6 +196,8 @@ chessModule
         out.push(cur)
       }
 })
+    //clean up that last '/' character with pop()
+    out.pop()
     $scope.currentFen = out.join('')
     console.log("current fen:", $scope.currentFen)
 
@@ -165,10 +205,8 @@ chessModule
 
 
 
-  function updateGame(currentmove){
-    $scope.gameHistory.push(currentmove)
-    console.log("game history:", $scope.gameHistory)
-  }
+
+  //
 
 	$scope.parseFen = function(fenStr){
 
@@ -201,10 +239,7 @@ chessModule
 
 			})
 		})
-
 		$scope.capturedPieces = []
-		$scope.turn = 'white'
-
 	}
 
 }])
