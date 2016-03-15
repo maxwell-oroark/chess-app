@@ -17,7 +17,6 @@ chessModule
 
 	var rows = $scope.board.rows
 
-  $scope.gameHistoryFromClient = ['rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR']
 
   //this is a helper function which tries to determine who's move it is from the game history array.
   $scope.determineTurn = function(gamehist){
@@ -49,15 +48,14 @@ chessModule
   //update the game on the server ---- this is called when a piece is moved.
   function updateGame(currentmove){
     //this below tries to assemble $scope.gameHistory client side before pushing it to the database
-    $scope.gameHistoryFromClient.push(currentmove)
+    // $scope.gameHistoryFromClient.push(currentmove)
 
-    console.log("game history 195:", $scope.gameHistoryFromClient)
     $http({
       method : 'PUT',
       url    : '/api/games',
-      data   : { id : $scope.gameId, moves : $scope.gameHistoryFromClient }
+      data   : { id : $scope.gameId, moves : currentmove }
     }).then(function(returnData){
-      console.log('return data from updating game on server 201: ', returnData)
+      console.log('update with single Fen: ', returnData.data.message)
     })
   }
 
@@ -139,6 +137,7 @@ chessModule
       updateFen()
       //update Game takes that lastest fen and updates the database with the entire game history
       updateGame($scope.currentFen)
+      $scope.parseFen($scope.currentFen)
 
 
 
@@ -155,7 +154,7 @@ chessModule
       updateFen()
       //update Game takes that lastest fen and updates the database with the entire game history
       updateGame($scope.currentFen)
-
+      $scope.parseFen($scope.currentFen)
 
 		}
 	}

@@ -64,10 +64,11 @@ module.exports = {
 
     update : function(req,res){
       //req.body is an array of Fen strings describing the entire history of the game
-      db.Game.update({_id : req.body.id}, {$set : { moves : req.body.moves}}, function(err){
+      db.Game.update({_id : req.body.id}, {$push : { moves : req.body.moves}}, function(err){
         if (err) throw err
+        res.json({message : 'posted game history to server'})
+        
       })
-      res.json({message : 'posted game history to server'})
 
     },
 
