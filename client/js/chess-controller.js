@@ -20,7 +20,7 @@ chessModule
 
   //this is a helper function which tries to determine who's move it is from the game history array.
   $scope.determineTurn = function(gamehist){
-    console.log('game history',gamehist.length)
+    console.log('game history: ',gamehist.length)
     if (gamehist.length % 2 == 0){
       console.log('White\'s TURN')
       $scope.turn = 'white'
@@ -76,9 +76,8 @@ chessModule
 	$scope.switchBlack = false
 	$scope.switchBack = false
 
-	$scope.switchBoard = function(){
-		$scope.switchBlack = !$scope.switchBlack
-		$scope.switchBack = !$scope.switchBack
+	$scope.dashboard = function(){
+		$location.path("/home")
 	}
 
 
@@ -220,7 +219,6 @@ chessModule
 				for (var i = 0; i < currentValue; i++){
 					out.push('o')
 				}
-				console.log('evaluating fen...')
 				return out.join('')
 			} else {
 				return currentValue

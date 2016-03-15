@@ -36,8 +36,9 @@ angular.module("chess")
               url    : '/api/signup',
               data   : $scope.signupForm
           }).then(function(returnData){
-              $scope.user.username = returnData.data.username
-              if ( returnData.data) {
+              console.log(returnData.data.user.name)
+              // $scope.user.username = returnData.data.user.name
+              if ( returnData.data.success ) {
 								$scope.userCreated = true;
                 console.log("user created")
 							 }
