@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //This grabs static files in the head of my shell html
-app.use(express.static(path.join(__dirname, '../client')))
+app.use(express.static(path.join(__dirname, '/../client')))
 
 // Database setup
 var mongoose = require('mongoose')
@@ -29,11 +29,11 @@ app.use("/api", apiRoutes)
 
 app.get('/', function(req, res){
   console.log('/ route firing')
-  res.sendFile('shell.html', {root : './client/partials'})
+  res.sendFile('shell.html', {root : __dirname + '/../client/partials'})
 });
 
 // Creating Server and Listening for Connections \\
-var port = 3000
+var port = 80
 app.listen(port, function(){
   console.log('Server running on port ' + port);
 
